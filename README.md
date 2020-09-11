@@ -5,7 +5,7 @@
 ## 安装
 
 ```javascript
-npm install cz848/miniprogram-draw
+npm install miniprogram-draw
 ```
 
 ## APIs
