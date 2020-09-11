@@ -1,0 +1,33 @@
+{
+  "name": "miniprogram-draw",
+  "version": "0.1",
+  "description": "小程序Canvas绘制海报工具",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "eslint index.js"
+  },
+  "keywords": [
+    "miniprogram",
+    "weapp",
+    "wxapp",
+    "draw",
+    "canvas",
+    "painter",
+    "poster"
+  ],
+  "author": "Tyler Chao",
+  "license": "MIT",
+  "repository": "cz848/miniprogram-draw",
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-promise": "^4.2.1"
+  },
+  "dependencies": {
+    "miniprogram-tools": "github:cz848/miniprogram-tools"
+  }
+}
