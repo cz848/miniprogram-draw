@@ -154,6 +154,9 @@ const shape = (ctx, c, bd, shd, x, y, w, h, src) => {
   ctx.restore();
 };
 
+// 依次用rpx2px转换
+const bcr = (...args) => args.map(rpx2px);
+
 /* /==================== */
 
 /**
@@ -166,12 +169,7 @@ const shape = (ctx, c, bd, shd, x, y, w, h, src) => {
  * h:   [图片高度]
  */
 const image = (ctx, src, x, y, w, h) => {
-  x = rpx2px(x);
-  y = rpx2px(y);
-  w = rpx2px(w);
-  h = rpx2px(h);
-
-  ctx.drawImage(src, x, y, w, h);
+  ctx.drawImage(src, ...bcr(x, y, w, h));
 };
 
 /*
@@ -187,11 +185,7 @@ const image = (ctx, src, x, y, w, h) => {
  * src: [填充图像的地址]
  */
 const rect = (ctx, x, y, w, h, c, bd, shd, src) => {
-  x = rpx2px(x);
-  y = rpx2px(y);
-  w = rpx2px(w);
-  h = rpx2px(h);
-
+  [x, y, w, h] = bcr(x, y, w, h);
   // 创建一个矩形路径
   ctx.rect(x, y, w, h);
 
@@ -213,10 +207,7 @@ const rect = (ctx, x, y, w, h, c, bd, shd, src) => {
  * src: [填充图片的地址]
  */
 const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src) => {
-  x = rpx2px(x);
-  y = rpx2px(y);
-  w = rpx2px(w);
-  h = rpx2px(h);
+  [x, y, w, h] = bcr(x, y, w, h);
 
   let drawing = true;
 
@@ -270,10 +261,7 @@ const circle = (ctx, x, y, d, c, bd, shd, src) => {
  * src: [填充图片的地址]
  */
 const ellipse = (ctx, x, y, w, h, c, bd, shd, src) => {
-  x = rpx2px(x);
-  y = rpx2px(y);
-  w = rpx2px(w);
-  h = rpx2px(h);
+  [x, y, w, h] = bcr(x, y, w, h);
 
   // 以圆心为中点画椭圆
   // 椭圆的参数方程：x=acosθ | y=bsinθ，这里x,y为左上角图标，所以相对圆心需要再加上a,b。
@@ -330,11 +318,7 @@ const ellipseImage = (ctx, src, x, y, w, h, bd, shd) => {
  * cw:  [要居中区域的宽度]
  */
 const centerImage = (ctx, src, x, y, w, h, cw) => {
-  cw = rpx2px(cw);
-  x = rpx2px(x);
-  y = rpx2px(y);
-  w = rpx2px(w);
-  h = rpx2px(h);
+  [x, y, w, h, cw] = bcr(x, y, w, h, cw);
 
   x += (cw - w) / 2;
 
@@ -353,10 +337,7 @@ const centerImage = (ctx, src, x, y, w, h, cw) => {
  */
 
 const text = (ctx, txt, x, y, fs, c, w) => {
-  x = rpx2px(x);
-  y = rpx2px(y);
-  w = rpx2px(w);
-
+  [x, y, w] = bcr(x, y, w);
   ctx.font = font(fs);
 
   if (c) ctx.fillStyle = c;
@@ -378,11 +359,9 @@ const text = (ctx, txt, x, y, fs, c, w) => {
  */
 
 const centerText = (ctx, txt, x, y, w, fs, c) => {
-  w = rpx2px(w);
-  x = rpx2px(x);
-  y = rpx2px(y);
-
+  [x, y, w] = bcr(x, y, w);
   ctx.font = font(fs);
+
   if (c) ctx.fillStyle = c;
   x += w / 2;
 
@@ -406,12 +385,9 @@ const centerText = (ctx, txt, x, y, w, fs, c) => {
  * c:   [字体颜色]
  */
 const paragraph = (ctx, txt, x, y, w, lh, ln, fs, c) => {
-  w = rpx2px(w);
-  x = rpx2px(x);
-  y = rpx2px(y);
-  lh = rpx2px(lh);
-
+  [x, y, w, lh] = bcr(x, y, w, lh);
   ctx.font = font(fs);
+
   // 文本宽度
   const tw = ctx.measureText(txt).width;
   const textLines = [''];
