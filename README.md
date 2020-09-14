@@ -65,7 +65,7 @@ draw.utils.loadImages(['https://xx', 'https://xx'])
 
 #### 居中绘制一张图片 `centerImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, cWidth: Number)`
 
-#### 绘制单行文本 `text(canvas: Object, txt: String, x: Number, y: Number, font: String | Number, color: String, maxWidth: Number)`
+#### 绘制单行文本 `text(canvas: Object, txt: String, x: Number, y: Number, maxWidth: Number, font: String | Number, color: String)`
 
 #### 居中绘制一行文本 `centerText(canvas: Object, txt: String, x: Number, y: Number, width: Number, font: String | Number, color: String)`
 
