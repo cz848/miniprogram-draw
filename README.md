@@ -28,15 +28,6 @@ draw.utils.rpx2px(20);
 draw.utils.px2rpx(20);
 ```
 
-#### css font属性转换 `font(value: Number | String): String`
-
-返回标准的 css font 属性字符串，只支持rpx单位
-
-```javascript
-draw.utils.font(20)
-draw.utils.font('bold 30rpx')
-```
-
 #### 载入网络图片 `loadImages(input: Array): Array`
 
 ```javascript
@@ -44,6 +35,13 @@ draw.utils.loadImages(['https://xx', 'https://xx'])
 ```
 
 ### 形状
+
+#### 设置css font属性 `setFont(canvas: Object, value: Number | String)`
+
+```javascript
+draw.setFont(20)
+draw.setFont('bold 30rpx')
+```
 
 #### 绘制图片 `image(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number)`
 
@@ -65,7 +63,7 @@ draw.utils.loadImages(['https://xx', 'https://xx'])
 
 #### 居中绘制一张图片 `centerImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, cWidth: Number)`
 
-#### 绘制单行文本 `text(canvas: Object, txt: String, x: Number, y: Number, maxWidth: Number, font: String | Number, color: String)`
+#### 绘制单行文本 `text(canvas: Object, txt: String, x: Number, y: Number, font: String | Number, color: String, maxWidth: Number)`
 
 #### 居中绘制一行文本 `centerText(canvas: Object, txt: String, x: Number, y: Number, width: Number, font: String | Number, color: String)`
 

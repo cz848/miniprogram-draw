@@ -4,7 +4,7 @@
  * 需要页面及样式配合，canvas设成2倍大小，否则可能造成图片模糊
  */
 /* eslint-disable no-param-reassign */
-import { mp, getSystemInfo } from 'miniprogram-tools';
+import { mp, getSystemInfo } from 'miniprogram-tools/weapp';
 
 mp.add(['getImageInfo', 'canvasToTempFilePath']);
 
@@ -336,11 +336,11 @@ const setFont = (ctx, fs) => {
  * txt: [要绘制的一行文本]
  * x:   [x坐标]
  * y:   [y坐标]
- * w:   [需要绘制的最大宽度]
  * fs:  [字体]
  * c:   [字体颜色]
+ * w:   [需要绘制的最大宽度]
  */
-const text = (ctx, txt, x, y, w, fs, c) => {
+const text = (ctx, txt, x, y, fs, c, w) => {
   [x, y, w] = bcr(x, y, w);
 
   if (fs) setFont(ctx, fs);
