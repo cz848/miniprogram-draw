@@ -34,14 +34,14 @@ draw.utils.px2rpx(20);
 draw.utils.loadImages(['https://xx', 'https://xx'])
 ```
 
-### 形状
-
-#### 设置css font属性 `setFont(canvas: Object, value: Number | String)`
+#### 设置css font属性 `font(canvas: Object, value: Number | String)`
 
 ```javascript
-draw.setFont(20)
-draw.setFont('bold 30rpx')
+draw.utils.font(20)
+draw.utils.font('bold 30rpx')
 ```
+
+### 形状
 
 #### 绘制图片 `image(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number)`
 
