@@ -325,11 +325,6 @@ const centerImage = (ctx, src, x, y, w, h, cw) => {
   ctx.drawImage(src, x, y, w, h);
 };
 
-// 设置字体
-const setFont = (ctx, fs) => {
-  ctx.font = font(fs);
-};
-
 /**
  * 绘制单行文本
  *
@@ -338,15 +333,23 @@ const setFont = (ctx, fs) => {
  * y:   [y坐标]
  * fs:  [字体]
  * c:   [字体颜色]
+ * sk:  [字体描边]
  * w:   [需要绘制的最大宽度]
  */
-const text = (ctx, txt, x, y, fs, c, w) => {
-  [x, y, w] = bcr(x, y, w);
 
-  if (fs) setFont(ctx, fs);
+const text = (ctx, txt, x, y, fs, c, sk, w) => {
+  [x, y, w] = bcr(x, y, w);
+  ctx.font = font(fs);
+
   if (c) ctx.fillStyle = c;
   ctx.save();
   ctx.setTextBaseline('top');
+  if (sk) {
+    const [skw, , skc] = border(sk);
+    ctx.lineWidth = skw;
+    ctx.strokeStyle = skc;
+    ctx.strokeText(txt, x, y, w);
+  }
   ctx.fillText(txt, x, y, w);
   ctx.restore();
 };
@@ -360,17 +363,25 @@ const text = (ctx, txt, x, y, fs, c, w) => {
  * w:   [一行宽度]
  * fs:  [字体]
  * c:   [字体颜色]
+ * sk:  [字体描边]
  */
-const centerText = (ctx, txt, x, y, w, fs, c) => {
-  [x, y, w] = bcr(x, y, w);
 
-  if (fs) setFont(ctx, fs);
+const centerText = (ctx, txt, x, y, w, fs, c, sk) => {
+  [x, y, w] = bcr(x, y, w);
+  ctx.font = font(fs);
+
   if (c) ctx.fillStyle = c;
   x += w / 2;
 
   ctx.save();
   ctx.setTextBaseline('top');
   ctx.setTextAlign('center');
+  if (sk) {
+    const [skw, , skc] = border(sk);
+    ctx.lineWidth = skw;
+    ctx.strokeStyle = skc;
+    ctx.strokeText(txt, x, y, w);
+  }
   ctx.fillText(txt, x, y, w);
   ctx.restore();
 };
@@ -389,9 +400,8 @@ const centerText = (ctx, txt, x, y, w, fs, c) => {
  */
 const paragraph = (ctx, txt, x, y, w, lh, ln, fs, c) => {
   [x, y, w, lh] = bcr(x, y, w, lh);
+  ctx.font = font(fs);
 
-  if (fs) setFont(ctx, fs);
-  if (c) ctx.fillStyle = c;
   // 文本宽度
   const tw = ctx.measureText(txt).width;
   const textLines = [''];
@@ -414,6 +424,7 @@ const paragraph = (ctx, txt, x, y, w, lh, ln, fs, c) => {
     textLines[0] = txt;
   }
 
+  if (c) ctx.fillStyle = c;
   ctx.save();
   ctx.setTextBaseline('top');
   textLines.forEach((line, j) => {
@@ -442,9 +453,9 @@ export default {
   utils: {
     rpx2px,
     px2rpx,
+    font,
     loadImages,
   },
-  setFont,
   image,
   rect,
   rectImage,
