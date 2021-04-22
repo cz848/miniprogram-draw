@@ -63,7 +63,7 @@ const border = value => {
   }
 };
 
-// 把阴影解析为[0, 0, 0, '#000']
+// 把阴影解析为[0, 0, 0, '#000']形式
 const shadow = value => {
   const shd = [0, 0, 0, '#000'];
 
@@ -90,12 +90,19 @@ const dashed = (ctx, w) => {
  * 在图形中填充图像
  *
  * src: [图像网络地址]
- * x:  [矩形起始x坐标]
- * y:  [矩形起始y坐标]
- * w:  [矩形宽度]
- * h:  [矩形高度]
+ * x:  [要填充的起始x坐标]
+ * y:  [要填充的起始y坐标]
+ * w:  [要填充的宽度]
+ * h:  [要填充的高度]
+ * p:  [要填充的内边距]
  */
-const fillImage = (ctx, src, x, y, w, h) => {
+const fillImage = (ctx, src, x, y, w, h, p) => {
+  if (p) {
+    x += p;
+    y += p;
+    w -= p * 2;
+    h -= p * 2;
+  }
   ctx.clip();
   ctx.drawImage(src, x, y, w, h);
 };
@@ -105,8 +112,14 @@ const fillImage = (ctx, src, x, y, w, h) => {
  * c:   [矩形填充色]
  * bd:  [矩形边框样式]
  * shd: [矩形阴影样式]
+ * x:  [矩形起始x坐标]
+ * y:  [矩形起始y坐标]
+ * w:  [矩形宽度]
+ * h:  [矩形高度]
+ * src: [图像网络地址]
+ * p:  [要填充图像的内边距]
  */
-const shape = (ctx, c, bd, shd, x, y, w, h, src) => {
+const shape = (ctx, c, bd, shd, x, y, w, h, src, p) => {
   // 设定shadow参数
   ctx.save();
   if (shd) {
@@ -150,7 +163,7 @@ const shape = (ctx, c, bd, shd, x, y, w, h, src) => {
   }
 
   // 绘制图像
-  if (src) fillImage(ctx, src, x, y, w, h);
+  if (src) fillImage(ctx, src, x, y, w, h, p);
   ctx.restore();
 };
 
@@ -184,13 +197,13 @@ const image = (ctx, src, x, y, w, h) => {
  * shd: [矩形阴影样式]
  * src: [填充图像的地址]
  */
-const rect = (ctx, x, y, w, h, c, bd, shd, src) => {
+const rect = (ctx, x, y, w, h, c, bd, shd, src, p) => {
   [x, y, w, h] = bcr(x, y, w, h);
   // 创建一个矩形路径
   ctx.rect(x, y, w, h);
 
   // 根据填充色、边框、阴影画出此路径
-  shape(ctx, c, bd, shd, x, y, w, h, src);
+  shape(ctx, c, bd, shd, x, y, w, h, src, p);
 };
 
 /**
@@ -206,7 +219,7 @@ const rect = (ctx, x, y, w, h, c, bd, shd, src) => {
  * shd: [阴影样式]
  * src: [填充图片的地址]
  */
-const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src) => {
+const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src, p) => {
   [x, y, w, h] = bcr(x, y, w, h);
 
   let drawing = true;
@@ -227,7 +240,7 @@ const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src) => {
     ctx.arc(x + rBL, y + h - rBL, rBL, Math.PI * 0.5, Math.PI);
     ctx.closePath();
 
-    shape(ctx, c, bd, shd, x, y, w, h, src);
+    shape(ctx, c, bd, shd, x, y, w, h, src, p);
   }
   ctx.restore();
   drawing = false;
@@ -244,8 +257,8 @@ const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src) => {
  * shd: [圆形阴影样式]
  * src: [填充图片的地址]
  */
-const circle = (ctx, x, y, d, c, bd, shd, src) => {
-  roundRect(ctx, x, y, d, d, d / 2, c, bd, shd, src);
+const circle = (ctx, x, y, d, c, bd, shd, src, p) => {
+  roundRect(ctx, x, y, d, d, d / 2, c, bd, shd, src, p);
 };
 
 /**
@@ -260,7 +273,7 @@ const circle = (ctx, x, y, d, c, bd, shd, src) => {
  * shd: [椭圆阴影样式]
  * src: [填充图片的地址]
  */
-const ellipse = (ctx, x, y, w, h, c, bd, shd, src) => {
+const ellipse = (ctx, x, y, w, h, c, bd, shd, src, p) => {
   [x, y, w, h] = bcr(x, y, w, h);
 
   // 以圆心为中点画椭圆
@@ -276,35 +289,35 @@ const ellipse = (ctx, x, y, w, h, c, bd, shd, src) => {
   ctx.closePath();
 
   // 绘制到画布上
-  shape(ctx, c, bd, shd, x, y, w, h, src);
+  shape(ctx, c, bd, shd, x, y, w, h, src, p);
 };
 
 /**
  * 绘制填充图像的矩形
  */
-const rectImage = (ctx, src, x, y, w, h, bd, shd) => {
-  rect(ctx, x, y, w, h, null, bd, shd, src);
+const rectImage = (ctx, src, x, y, w, h, bd, shd, p) => {
+  rect(ctx, x, y, w, h, null, bd, shd, src, p);
 };
 
 /**
  * 绘制填充图像的圆角矩形
  */
-const roundRectImage = (ctx, src, x, y, w, h, r, bd, shd) => {
-  roundRect(ctx, x, y, w, h, r, null, bd, shd, src);
+const roundRectImage = (ctx, src, x, y, w, h, r, bd, shd, p) => {
+  roundRect(ctx, x, y, w, h, r, null, bd, shd, src, p);
 };
 
 /**
  * 绘制填充图像的圆形
  */
-const circleImage = (ctx, src, x, y, d, bd, shd) => {
-  circle(ctx, x, y, d, null, bd, shd, src);
+const circleImage = (ctx, src, x, y, d, bd, shd, p) => {
+  circle(ctx, x, y, d, null, bd, shd, src, p);
 };
 
 /**
  * 绘制填充图像的椭圆形
  */
-const ellipseImage = (ctx, src, x, y, w, h, bd, shd) => {
-  ellipse(ctx, x, y, w, h, null, bd, shd, src);
+const ellipseImage = (ctx, src, x, y, w, h, bd, shd, p) => {
+  ellipse(ctx, x, y, w, h, null, bd, shd, src, p);
 };
 
 /**
@@ -360,7 +373,7 @@ const text = (ctx, txt, x, y, fs, c, sk, w) => {
  * txt: [要绘制的一行文本]
  * x:   [起始x坐标]
  * y:   [起始y坐标]
- * w:   [一行宽度]
+ * w:   [整体宽度]
  * fs:  [字体]
  * c:   [字体颜色]
  * sk:  [字体描边]

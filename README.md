@@ -45,21 +45,21 @@ draw.utils.font('bold 30rpx')
 
 #### 绘制图片 `image(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number)`
 
-#### 绘制矩形 `rect(canvas: Object, x: Number, y: Number, width: Number, height: Number, color: String, border: String, shadow: String)`
+#### 绘制矩形 `rect(canvas: Object, x: Number, y: Number, width: Number, height: Number, color: String, border: String, shadow: String, padding: Number)`
 
-#### 绘制圆角矩形 `roundRect(canvas: Object, x: Number, y: Number, width: Number, height: Number, radius: Number, color: String, border: String, shadow: String)`
+#### 绘制圆角矩形 `roundRect(canvas: Object, x: Number, y: Number, width: Number, height: Number, radius: Number, color: String, border: String, shadow: String, padding: Number)`
 
-#### 绘制圆形　`circle(canvas: Object, x: Number, y: Number, diameter: Number, color: String, border: String, shadow: String)`
+#### 绘制圆形　`circle(canvas: Object, x: Number, y: Number, diameter: Number, color: String, border: String, shadow: String, padding: Number)`
 
-#### 绘制椭圆 `ellipse(canvas: Object, x: Number, y: Number, width: Number, height: Number, color: String, border: String, shadow: String)`
+#### 绘制椭圆 `ellipse(canvas: Object, x: Number, y: Number, width: Number, height: Number, color: String, border: String, shadow: String, padding: Number)`
 
-#### 绘制填充图像的矩形 `rectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String)`
+#### 绘制填充图像的矩形 `rectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number)`
 
-#### 绘制填充图像的圆角矩形 `roundRectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, radius: Number, border: String, shadow: String)`
+#### 绘制填充图像的圆角矩形 `roundRectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, radius: Number, border: String, shadow: String, padding: Number)`
 
-#### 绘制填充图像的圆形 `circleImage(canvas: Object, src: String, x: Number, y: Number, diameter: Number, border: String, shadow: String)`
+#### 绘制填充图像的圆形 `circleImage(canvas: Object, src: String, x: Number, y: Number, diameter: Number, border: String, shadow: String, padding: Number)`
 
-#### 绘制填充图像的椭圆形 `ellipseImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String)`
+#### 绘制填充图像的椭圆形 `ellipseImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number)`
 
 #### 居中绘制一张图片 `centerImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, cWidth: Number)`
 
