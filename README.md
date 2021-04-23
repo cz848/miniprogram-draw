@@ -57,13 +57,13 @@ draw.utils.font('bold 30rpx')
 
 #### 绘制椭圆 `ellipse(canvas: Object, x: Number, y: Number, width: Number, height: Number, color: String, border: String, shadow: String, padding: Number)`
 
-#### 绘制填充图像的矩形 `rectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number)`
+#### 绘制填充图像的矩形 `rectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number, color: String)`
 
-#### 绘制填充图像的圆角矩形 `roundRectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, radius: Number, border: String, shadow: String, padding: Number)`
+#### 绘制填充图像的圆角矩形 `roundRectImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, radius: Number, border: String, shadow: String, padding: Number, color: String)`
 
-#### 绘制填充图像的圆形 `circleImage(canvas: Object, src: String, x: Number, y: Number, diameter: Number, border: String, shadow: String, padding: Number)`
+#### 绘制填充图像的圆形 `circleImage(canvas: Object, src: String, x: Number, y: Number, diameter: Number, border: String, shadow: String, padding: Number, color: String)`
 
-#### 绘制填充图像的椭圆形 `ellipseImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number)`
+#### 绘制填充图像的椭圆形 `ellipseImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number, color: String)`
 
 ### 文本
 
@@ -71,7 +71,7 @@ draw.utils.font('bold 30rpx')
 
 #### 居中绘制一行文本 `centerText(canvas: Object, txt: String, x: Number, y: Number, width: Number, font: String | Number, color: String, stroke: String | Number)`
 
-#### 绘制多行文本　`paragraph(canvas: Object, txt: String, x: Number, y: Number, maxWidth: Number, lineHeigh: Number, maxLine: Number, font: String | Number, color: String)`
+#### 绘制多行文本　`paragraph(canvas: Object, txt: String, x: Number, y: Number, maxWidth: Number, lineHeigh: Number, maxLine: Number, font: String | Number, color: String, stroke: String | Number)`
 
 ### 生成
 

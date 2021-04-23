@@ -407,8 +407,9 @@ const centerText = (ctx, txt, x, y, w, fs, c, sk) => {
  * ln:  [最大行数]
  * fs:  [字体]
  * c:   [字体颜色]
+ * sk:  [字体描边]
  */
-const paragraph = (ctx, txt, x, y, w, lh, ln, fs, c) => {
+const paragraph = (ctx, txt, x, y, w, lh, ln, fs, c, sk) => {
   [x, y, w, lh] = bcr(x, y, w, lh);
   ctx.font = font(fs);
 
@@ -437,9 +438,17 @@ const paragraph = (ctx, txt, x, y, w, lh, ln, fs, c) => {
   if (c) ctx.fillStyle = c;
   ctx.save();
   ctx.setTextBaseline('top');
+  if (sk) {
+    const [skw, , skc] = border(sk);
+    ctx.lineWidth = skw;
+    ctx.strokeStyle = skc;
+  }
   textLines.forEach((line, j) => {
     if (j === ln - 1 && i > ln) line = `${line.slice(0, line.length - 1)}...`;
-    if (j < ln) ctx.fillText(line, x, y + lh * (j + 1));
+    if (j < ln) {
+      ctx.strokeText(line, x, y + lh * (j + 1));
+      ctx.fillText(line, x, y + lh * (j + 1));
+    }
   });
   ctx.restore();
 };
