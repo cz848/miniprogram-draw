@@ -198,7 +198,7 @@ const image = (ctx, src, x, y, w, h) => {
  * src: [填充图像的地址]
  */
 const rect = (ctx, x, y, w, h, c, bd, shd, src, p) => {
-  [x, y, w, h] = bcr(x, y, w, h);
+  [x, y, w, h, p] = bcr(x, y, w, h, p);
   // 创建一个矩形路径
   ctx.rect(x, y, w, h);
 
@@ -220,7 +220,7 @@ const rect = (ctx, x, y, w, h, c, bd, shd, src, p) => {
  * src: [填充图片的地址]
  */
 const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src, p) => {
-  [x, y, w, h] = bcr(x, y, w, h);
+  [x, y, w, h, p] = bcr(x, y, w, h, p);
 
   let drawing = true;
 
@@ -274,7 +274,7 @@ const circle = (ctx, x, y, d, c, bd, shd, src, p) => {
  * src: [填充图片的地址]
  */
 const ellipse = (ctx, x, y, w, h, c, bd, shd, src, p) => {
-  [x, y, w, h] = bcr(x, y, w, h);
+  [x, y, w, h, p] = bcr(x, y, w, h, p);
 
   // 以圆心为中点画椭圆
   // 椭圆的参数方程：x=acosθ | y=bsinθ，这里x,y为左上角图标，所以相对圆心需要再加上a,b。

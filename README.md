@@ -41,9 +41,13 @@ draw.utils.font(20)
 draw.utils.font('bold 30rpx')
 ```
 
-### 形状
+### 图像
 
 #### 绘制图片 `image(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number)`
+
+#### 居中绘制一张图片 `centerImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, cWidth: Number)`
+
+### 图形
 
 #### 绘制矩形 `rect(canvas: Object, x: Number, y: Number, width: Number, height: Number, color: String, border: String, shadow: String, padding: Number)`
 
@@ -61,13 +65,15 @@ draw.utils.font('bold 30rpx')
 
 #### 绘制填充图像的椭圆形 `ellipseImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, border: String, shadow: String, padding: Number)`
 
-#### 居中绘制一张图片 `centerImage(canvas: Object, src: String, x: Number, y: Number, width: Number, height: Number, cWidth: Number)`
+### 文本
 
 #### 绘制单行文本 `text(canvas: Object, txt: String, x: Number, y: Number, font: String | Number, color: String, stroke: String | Number, maxWidth: Number)`
 
 #### 居中绘制一行文本 `centerText(canvas: Object, txt: String, x: Number, y: Number, width: Number, font: String | Number, color: String, stroke: String | Number)`
 
 #### 绘制多行文本　`paragraph(canvas: Object, txt: String, x: Number, y: Number, maxWidth: Number, lineHeigh: Number, maxLine: Number, font: String | Number, color: String)`
+
+### 生成
 
 #### 绘制到画布上 `toCanvas(canvas: Object, reverse: Boolean)`
 返回Promise
