@@ -122,18 +122,13 @@ const fillImage = (ctx, src, x, y, w, h, p) => {
 const shape = (ctx, c, bd, shd, x, y, w, h, src, p) => {
   // 设定shadow参数
   ctx.save();
+
   if (shd) {
     const [sx, sy, sb, sc] = shadow(shd);
     ctx.shadowOffsetX = sx;
     ctx.shadowOffsetY = sy;
     ctx.shadowBlur = sb;
     ctx.shadowColor = sc;
-  }
-
-  if (c) {
-    // 设定填充色
-    ctx.fillStyle = c;
-    ctx.fill();
   }
 
   if (bd) {
@@ -160,6 +155,12 @@ const shape = (ctx, c, bd, shd, x, y, w, h, src, p) => {
     ctx.shadowOffsetY = 0;
     ctx.shadowBlur = 0;
     ctx.shadowColor = '#000';
+  }
+
+  if (c) {
+    // 设定填充色
+    ctx.fillStyle = c;
+    ctx.fill();
   }
 
   // 绘制图像
@@ -224,9 +225,6 @@ const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src, p) => {
 
   let drawing = true;
 
-  // 先保存状态
-  ctx.save();
-
   if (drawing) {
     // 开始绘制
     ctx.beginPath();
@@ -242,7 +240,6 @@ const roundRect = (ctx, x, y, w, h, r, c, bd, shd, src, p) => {
 
     shape(ctx, c, bd, shd, x, y, w, h, src, p);
   }
-  ctx.restore();
   drawing = false;
 };
 
@@ -295,29 +292,29 @@ const ellipse = (ctx, x, y, w, h, c, bd, shd, src, p) => {
 /**
  * 绘制填充图像的矩形
  */
-const rectImage = (ctx, src, x, y, w, h, bd, shd, p) => {
-  rect(ctx, x, y, w, h, null, bd, shd, src, p);
+const rectImage = (ctx, src, x, y, w, h, bd, shd, p, c) => {
+  rect(ctx, x, y, w, h, c, bd, shd, src, p);
 };
 
 /**
  * 绘制填充图像的圆角矩形
  */
-const roundRectImage = (ctx, src, x, y, w, h, r, bd, shd, p) => {
-  roundRect(ctx, x, y, w, h, r, null, bd, shd, src, p);
+const roundRectImage = (ctx, src, x, y, w, h, r, bd, shd, p, c) => {
+  roundRect(ctx, x, y, w, h, r, c, bd, shd, src, p);
 };
 
 /**
  * 绘制填充图像的圆形
  */
-const circleImage = (ctx, src, x, y, d, bd, shd, p) => {
-  circle(ctx, x, y, d, null, bd, shd, src, p);
+const circleImage = (ctx, src, x, y, d, bd, shd, p, c) => {
+  circle(ctx, x, y, d, c, bd, shd, src, p);
 };
 
 /**
  * 绘制填充图像的椭圆形
  */
-const ellipseImage = (ctx, src, x, y, w, h, bd, shd, p) => {
-  ellipse(ctx, x, y, w, h, null, bd, shd, src, p);
+const ellipseImage = (ctx, src, x, y, w, h, bd, shd, p, c) => {
+  ellipse(ctx, x, y, w, h, c, bd, shd, src, p);
 };
 
 /**
