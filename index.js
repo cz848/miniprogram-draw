@@ -50,7 +50,7 @@ const border = (that, value) => {
 
   if (isNumber(value)) return [value].concat(bd.slice(1, 3));
   if (isString(value)) {
-    const val = value.split(' ');
+    const val = value.split(/\s+/);
     return val.reduce((acc, v) => {
       if (isStyle(v)) acc[1] = v;
       else if (isColor(v)) acc[2] = v;
@@ -64,14 +64,14 @@ const border = (that, value) => {
 };
 
 // 把阴影解析为[0, 0, 0, '#000']形式
-const shadow = value => {
+const shadow = (that, value) => {
   const shd = [0, 0, 0, '#000'];
 
   if (isString(value)) {
-    const val = value.split(' ');
+    const val = value.split(/\s+/);
     return val.reduce((acc, v, i) => {
       const uv = unitless(v);
-      if (isNumber(uv)) acc[i] = uv;
+      if (isNumber(uv)) acc[i] = that.utils.rpx2px(uv);
       else if (isColor(v)) acc[3] = v;
       return acc;
     }, shd);
@@ -127,7 +127,7 @@ const shape = (that, c, bd, shd, x, y, w, h, src, p) => {
   ctx.save();
 
   if (shd) {
-    const [sx, sy, sb, sc] = shadow(shd);
+    const [sx, sy, sb, sc] = shadow(that, shd);
     ctx.shadowOffsetX = sx;
     ctx.shadowOffsetY = sy;
     ctx.shadowBlur = sb;
