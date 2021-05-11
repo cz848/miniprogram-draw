@@ -1,6 +1,6 @@
 {
   "name": "miniprogram-draw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "小程序Canvas绘制海报工具",
   "main": "index.js",
   "directories": {
