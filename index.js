@@ -176,16 +176,17 @@ const bcr = (that, ...args) => args.map(that.utils.rpx2px);
 /* /==================== */
 
 class Draw {
-  constructor(canvasId, w, h, ratio = devicePixelRatio) {
-    this.init(canvasId, w, h, ratio);
+  constructor(canvasId, w, h, ratio = devicePixelRatio, instance = null) {
+    this.init(canvasId, w, h, ratio, instance);
   }
 
-  init(canvasId, w, h, ratio) {
-    this.ctx = wx.createCanvasContext(canvasId);
+  init(canvasId, w, h, ratio, instance) {
+    this.ctx = wx.createCanvasContext(canvasId, instance);
     this.canvasId = canvasId;
     this.width = w;
     this.height = h;
     this.ratio = ratio;
+    this.instance = instance;
   }
 
   utils = {
@@ -502,7 +503,7 @@ class Draw {
    */
   toImage(options) {
     return this.toCanvas()
-      .then(() => mp.canvasToTempFilePath({ canvasId: this.canvasId, ...options }))
+      .then(() => mp.canvasToTempFilePath({ canvasId: this.canvasId, ...options }, this.instance))
       .then(res => ({ path: res.tempFilePath }))
       .catch(e => e);
   }
