@@ -152,18 +152,18 @@ const shape = (that, c, bd, shd, x, y, w, h, src, p) => {
     }
   }
 
+  if (c) {
+    // 设定填充色
+    ctx.fillStyle = c;
+    ctx.fill();
+  }
+
   // 还原设置，避免传给图像
   if (shd) {
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 0;
     ctx.shadowBlur = 0;
     ctx.shadowColor = '#000';
-  }
-
-  if (c) {
-    // 设定填充色
-    ctx.fillStyle = c;
-    ctx.fill();
   }
 
   // 绘制图像
