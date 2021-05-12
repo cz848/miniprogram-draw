@@ -13,8 +13,8 @@ npm install miniprogram-draw
 创建绘图实例
 
 ```javascript
-// 获取canvas上下文
-const draw = new Draw(canvasId: String, canvasWidth: Number, canvasHeight: Number, ratio?: Number);
+// 获取canvas上下文，如果在组件中使用，instance需传入this
+const draw = new Draw(canvasId: String, canvasWidth: Number, canvasHeight: Number, ratio?: Number, instance?: Object);
 ```
 
 其中，`ratio`可省略，默认为当前机型的devicePixelRatio
